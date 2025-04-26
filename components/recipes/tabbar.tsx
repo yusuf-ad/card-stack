@@ -9,7 +9,7 @@ export const tabs = [
     name: "Favorites",
   },
   {
-    name: "Profile",
+    name: "Rated",
   },
 ];
 

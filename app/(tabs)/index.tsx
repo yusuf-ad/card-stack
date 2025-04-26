@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
     // Adjust vertical padding for desired height
-    paddingVertical: Platform.OS === "ios" ? 10 : 8,
+    paddingVertical: Platform.OS === "ios" ? 14 : 0,
     marginRight: 10,
   },
   searchIcon: {
