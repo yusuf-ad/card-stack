@@ -22,6 +22,9 @@ export default function Index() {
       <View
         style={{
           paddingHorizontal: 16,
+          flex: 1,
+          justifyContent: "space-between",
+          gap: 32,
         }}
       >
         {/* Search Bar Area */}
@@ -50,9 +53,14 @@ export default function Index() {
         </View>
 
         {/* Recipe Card */}
-        <View style={{ marginTop: 96 }}>
+        <View
+          style={{
+            flex: 1,
+            marginTop: 64,
+          }}
+        >
           {Array.from({ length: 5 }, (_, index) => (
-            <MealCard key={index} order={index} />
+            <MealCard key={index} order={index} active={index === 4} />
           ))}
         </View>
       </View>
@@ -80,7 +88,6 @@ const styles = StyleSheet.create({
     // Adjust vertical padding for desired height
     paddingVertical: Platform.OS === "ios" ? 10 : 8,
     marginRight: 10,
-    height: 48, // Set a fixed height for the search bar
   },
   searchIcon: {
     marginRight: 8,
@@ -96,6 +103,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
-    height: 48, // Match height with searchBarxs
   },
 });
