@@ -50,7 +50,7 @@ export default function Index() {
         </View>
 
         {/* Recipe Card */}
-        <View style={{ marginTop: 90 }}>
+        <View style={{ marginTop: 96 }}>
           {Array.from({ length: 5 }, (_, index) => (
             <MealCard key={index} order={index} />
           ))}

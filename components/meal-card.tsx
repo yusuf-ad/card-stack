@@ -20,7 +20,7 @@ export default function MealCard({ order }: { order: number }) {
     >
       <Image
         source={{
-          uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn3y-14DFlXMOyQlGBYHgh_rD5_YmPI4F7sg&s",
+          uri: "https://static01.nyt.com/images/2021/02/14/dining/carbonara-horizontal/carbonara-horizontal-threeByTwoMediumAt2X-v2.jpg?quality=75&auto=webp",
         }}
         style={styles.cardImage}
       />
