@@ -7,7 +7,7 @@ import {
   Platform,
   Text,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Make sure @expo/vector-icons is installed
+import { Ionicons } from "@expo/vector-icons";
 import MealCard from "@/components/meal-card";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TabBar from "@/components/recipes/tabbar";
