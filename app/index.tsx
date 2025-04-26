@@ -1,15 +1,101 @@
-import { Text, View } from "react-native";
+import { theme } from "@/theme";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+  Text,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons"; // Make sure @expo/vector-icons is installed
+import MealCard from "@/components/meal-card";
+import { SafeAreaView } from "react-native-safe-area-context";
+import TabBar from "@/components/recipes/tabbar";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.background }]}
     >
-      <Text>hello.</Text>
-    </View>
+      <TabBar />
+
+      <View
+        style={{
+          paddingHorizontal: 16,
+        }}
+      >
+        {/* Search Bar Area */}
+        <View style={styles.searchContainer}>
+          <View
+            style={[styles.searchBar, { backgroundColor: theme.lightGrey }]}
+          >
+            <Ionicons
+              name="search"
+              size={20}
+              color={theme.grey}
+              style={styles.searchIcon}
+            />
+            <TextInput
+              placeholder="Search"
+              style={[styles.searchInput, { color: theme.text }]}
+              placeholderTextColor={theme.grey}
+            />
+          </View>
+          <TouchableOpacity
+            style={[styles.filterButton, { backgroundColor: theme.primary }]}
+          >
+            {/* Using 'options-outline' for filter icon, adjust if needed */}
+            <Ionicons name="options-outline" size={24} color={theme.white} />
+          </TouchableOpacity>
+        </View>
+
+        {/* Recipe Card */}
+        <View style={{ marginTop: 90 }}>
+          {Array.from({ length: 5 }, (_, index) => (
+            <MealCard key={index} order={index} />
+          ))}
+        </View>
+      </View>
+
+      {/* Add more recipe cards or content here */}
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // Add padding top to account for status bar, adjust as needed
+  },
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  searchBar: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    // Adjust vertical padding for desired height
+    paddingVertical: Platform.OS === "ios" ? 10 : 8,
+    marginRight: 10,
+    height: 48, // Set a fixed height for the search bar
+  },
+  searchIcon: {
+    marginRight: 8,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+  },
+  filterButton: {
+    // Match vertical padding with searchBar
+    paddingVertical: Platform.OS === "ios" ? 10 : 8,
+    paddingHorizontal: 10, // Keep horizontal padding
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 48, // Match height with searchBarxs
+  },
+});
