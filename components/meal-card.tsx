@@ -49,25 +49,31 @@ export default function MealCardList() {
   const flingUp = Gesture.Fling()
     .direction(Directions.DOWN)
     .onStart(() => {
-      if (activeIndex.value === meals.length - 1) {
+      if (activeIndex.value >= meals.length - 1) {
         return;
       }
 
-      activeIndex.value = withTiming(activeIndex.value + 1, { duration });
+      activeIndex.value = withTiming(Math.floor(activeIndex.value + 1), {
+        duration,
+      });
 
       console.log("fling up");
+      console.log(activeIndex.value);
     });
 
   const flingDown = Gesture.Fling()
     .direction(Directions.UP)
     .onStart(() => {
-      if (activeIndex.value === 0) {
+      if (activeIndex.value <= 0) {
         return;
       }
 
-      activeIndex.value = withTiming(activeIndex.value - 1, { duration });
+      activeIndex.value = withTiming(Math.ceil(activeIndex.value - 1), {
+        duration,
+      });
 
       console.log("fling down");
+      console.log(activeIndex.value);
     });
 
   return (
