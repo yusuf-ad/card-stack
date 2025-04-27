@@ -29,7 +29,7 @@ export const dummyMeals = [
     details: "45 min | ~550 kcal | Contains Dairy | Medium Spice",
     rating: 4,
     imageUri:
-      "https://cdn.usegalileo.ai/screenshots/046ff55c-2dee-4265-a8dd-3c468d63245d.webp",
+      "https://www.eatingwell.com/thmb/FriPEmhoqOfQUnNM3YvEyYXMqm8=/364x242/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/6610044-5fadb141fd504ad0ab032f7efd04bff6.jpg",
   },
   {
     id: "4",
@@ -40,7 +40,7 @@ export const dummyMeals = [
     details: "60 min | ~450 kcal | Vegan | Gluten-Free Option",
     rating: 3,
     imageUri:
-      "https://cdn.loveandlemons.com/wp-content/uploads/2020/11/shepherds-pie.jpg",
+      "https://www.eatingwell.com/thmb/q-BTNCB8ktpxsLvPA1k_uknvq9A=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/EWL-High_Protein_Penne_with_Ground_Turkey_and_Mushrooms-1X1-11596_preview_maxWidth_4000_maxHeight_4000_ppi_300_quality_100-fa628a4be7ed40f3bcaa4d0204bbeca0.jpg",
   },
   {
     id: "5",
@@ -50,6 +50,6 @@ export const dummyMeals = [
     details: "40 min | ~400 kcal | Contains Fish | Pescatarian",
     rating: 5,
     imageUri:
-      "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3VzaGl8ZW58MHx8MHx8&w=1000&q=80",
+      "https://www.eatingwell.com/thmb/gfHdUFKf-f1xNK2Vx0GlMiTe3AY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/5783153-9d5db46d3eba4f45b4e05d87c976637d.jpg",
   },
-].reverse(); // Reverse so the last item (index 4) is rendered on top initially
+];

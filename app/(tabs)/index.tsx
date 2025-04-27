@@ -7,15 +7,11 @@ import {
   Platform,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import MealCard from "@/components/meal-card";
+import MealCardList, { Meal } from "@/components/meal-card";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TabBar from "@/components/recipes/tabbar";
-import { dummyMeals } from "@/lib/dummy-data";
-import { useState } from "react";
 
 export default function Index() {
-  const [meals, setMeals] = useState(dummyMeals);
-
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: theme.background }]}
@@ -55,20 +51,7 @@ export default function Index() {
         </View>
 
         {/* Recipe Cards */}
-        <View
-          style={{
-            flex: 1,
-          }}
-        >
-          {meals.map((meal, index) => (
-            <MealCard
-              key={meal.id}
-              meal={meal}
-              order={index}
-              active={index === meals.length - 1}
-            />
-          ))}
-        </View>
+        <MealCardList />
       </View>
     </SafeAreaView>
   );
