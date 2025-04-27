@@ -1,6 +1,12 @@
 import { theme } from "@/theme";
 import { Ionicons } from "@expo/vector-icons";
-import { Image, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   SlideInDown,
@@ -9,14 +15,30 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 
+type Meal = {
+  id: string;
+  cuisine: string;
+  title: string;
+  description: string;
+  details: string;
+  rating: number;
+  imageUri: string;
+};
+
 export default function MealCard({
+  meal,
   order,
   active,
 }: {
+  meal: Meal;
   order: number;
   active: boolean;
 }) {
   const offset = useSharedValue(0);
+  const screenWidth = useWindowDimensions().width;
+  const cardWidth = screenWidth - 32; // Assuming 16px padding on each side
+
+  console.log("screenWidth", screenWidth);
 
   const translateX = useAnimatedStyle(() => ({
     transform: [
@@ -59,23 +81,22 @@ export default function MealCard({
       >
         <Image
           source={{
-            uri: "https://static01.nyt.com/images/2021/02/14/dining/carbonara-horizontal/carbonara-horizontal-threeByTwoMediumAt2X-v2.jpg?quality=75&auto=webp",
+            uri: meal.imageUri, // Use imageUri from meal prop
           }}
           style={styles.cardImage}
         />
         <View style={styles.cardContent}>
           <Text style={[styles.cuisine, { color: theme.grey }]}>
-            Cuisine: Mexican
+            Cuisine: {meal.cuisine} {/* Use cuisine from meal prop */}
           </Text>
           <Text style={[styles.title, { color: theme.text }]}>
-            Camarones A La Diabla
+            {meal.title} {/* Use title from meal prop */}
           </Text>
           <Text style={[styles.description, { color: theme.textSecondary }]}>
-            Spicy Mexican shrimp dish that's high in protein and vegan. Perfect
-            for a quick meal.
+            {meal.description} {/* Use description from meal prop */}
           </Text>
           <Text style={[styles.details, { color: theme.grey }]}>
-            30 min | ~350 kcal | Vegan | High Protein
+            {meal.details} {/* Use details from meal prop */}
           </Text>
           <View style={styles.ratingContainer}>
             <Text style={[styles.ratingLabel, { color: theme.text }]}>
@@ -84,7 +105,7 @@ export default function MealCard({
             {Array.from({ length: 5 }, (_, index) => (
               <Ionicons
                 key={index}
-                name={index < 4 ? "star" : "star-outline"}
+                name={index < meal.rating ? "star" : "star-outline"} // Use rating from meal prop
                 size={16}
                 color={theme.primary}
               />
@@ -101,8 +122,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     borderRadius: 12,
+    height: "75%",
     overflow: "hidden", // Clip image to rounded corners
-    marginBottom: 20,
     // Add shadow for card effect (iOS)
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
@@ -112,6 +133,7 @@ const styles = StyleSheet.create({
     elevation: 4,
     borderWidth: 1,
     borderColor: "#ddd", // Optional border for card
+    bottom: 32,
   },
   cardImage: {
     width: "100%",

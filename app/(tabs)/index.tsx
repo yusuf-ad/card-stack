@@ -5,14 +5,17 @@ import {
   StyleSheet,
   TouchableOpacity,
   Platform,
-  Text,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import MealCard from "@/components/meal-card";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TabBar from "@/components/recipes/tabbar";
+import { dummyMeals } from "@/lib/dummy-data";
+import { useState } from "react";
 
 export default function Index() {
+  const [meals, setMeals] = useState(dummyMeals);
+
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: theme.background }]}
@@ -47,25 +50,26 @@ export default function Index() {
           <TouchableOpacity
             style={[styles.filterButton, { backgroundColor: theme.primary }]}
           >
-            {/* Using 'options-outline' for filter icon, adjust if needed */}
             <Ionicons name="options-outline" size={24} color={theme.white} />
           </TouchableOpacity>
         </View>
 
-        {/* Recipe Card */}
+        {/* Recipe Cards */}
         <View
           style={{
             flex: 1,
-            marginTop: 64,
           }}
         >
-          {Array.from({ length: 5 }, (_, index) => (
-            <MealCard key={index} order={index} active={index === 4} />
+          {meals.map((meal, index) => (
+            <MealCard
+              key={meal.id}
+              meal={meal}
+              order={index}
+              active={index === meals.length - 1}
+            />
           ))}
         </View>
       </View>
-
-      {/* Add more recipe cards or content here */}
     </SafeAreaView>
   );
 }
@@ -73,7 +77,6 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // Add padding top to account for status bar, adjust as needed
   },
   searchContainer: {
     flexDirection: "row",
