@@ -1,7 +1,7 @@
-import { dummyMeals } from "@/lib/dummy-data";
+import data from "@/data.json";
 import { theme } from "@/theme";
 import { Ionicons } from "@expo/vector-icons";
-import { act, useState } from "react";
+import { useState } from "react";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import {
   Directions,
@@ -43,7 +43,17 @@ const layout = {
 const maxVisibleItems = 5;
 
 export default function MealCardList() {
-  const [meals, setMeals] = useState(dummyMeals);
+  const [meals, setMeals] = useState<Meal[]>(() =>
+    data.results.map((m) => ({
+      id: m.id.toString(),
+      cuisine: m.cuisines[0] ?? "",
+      title: m.title,
+      description: m.summary.replace(/<[^>]+>/g, ""),
+      details: `${m.readyInMinutes} min | ${m.servings} servings`,
+      rating: Math.round(m.spoonacularScore / 20),
+      imageUri: m.image,
+    }))
+  );
   const activeIndex = useSharedValue(0);
 
   const flingUp = Gesture.Fling()
@@ -150,7 +160,12 @@ function MealCard({
   });
 
   return (
-    <Animated.View style={[styles.card, animatedStyles]}>
+    <Animated.View
+      entering={SlideInDown.delay(index * 300)
+        .springify()
+        .damping(15)}
+      style={[styles.card, animatedStyles]}
+    >
       <Image
         source={{
           uri: meal.imageUri,
@@ -163,7 +178,7 @@ function MealCard({
         </Text>
         <Text style={[styles.title, { color: theme.text }]}>{meal.title}</Text>
         <Text style={[styles.description, { color: theme.textSecondary }]}>
-          {meal.description}
+          {meal.description.slice(0, 125)}...
         </Text>
         <Text style={[styles.details, { color: theme.grey }]}>
           {meal.details}
@@ -206,12 +221,13 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: "100%",
-    height: "50%", // Adjust height as needed
+    height: layout.height * 0.4,
     resizeMode: "cover",
   },
   cardContent: {
+    height: layout.height * 0.6,
     paddingHorizontal: 16,
-    paddingTop: 20,
+    paddingTop: 12,
     paddingBottom: 24,
   },
   cuisine: {
